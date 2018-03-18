@@ -1,0 +1,61 @@
+#include <net/net.hpp>
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+bool client;
+
+std::string ip;
+int port;
+
+void arg_check(char *argv[]) {
+    if (!strcmp(argv[1], "0")) {
+        client = true;
+    }
+    else if (!strcmp(argv[1], "1")) {
+        client = false;
+    }
+    else {
+        exit(1);
+    }
+}
+
+void *on_connect(int client_fd, Server *server) {
+    printf("client %d has connected.\n", client_fd);
+    server->broadcast("Hello, new client!");
+}
+
+void *on_data_get(const char *dat, Client *client) {
+    printf("recieved message '%s' from server\n", dat);
+}
+
+void server_start(Net *net) {
+    printf("Join this server using port %d and ip %s!\n", port, ip.c_str());
+
+    Server server(port, ip);
+    server.listen(on_connect);
+}
+
+void client_start() {
+    Client client(port, ip);
+    client.listen(on_data_get);
+}
+
+int main(int argc, char *argv[]) {
+    if (argc != 3) {
+        puts("Usage: <program-name> <0|1> <adapter>");
+        return 1;
+    }
+    arg_check(argv);
+
+    Net net;
+
+    ip = net.get_host_ip(net.get_default_device());
+    port = 8088;
+
+    if (client)
+        client_start();
+    else
+        server_start(&net);
+}
