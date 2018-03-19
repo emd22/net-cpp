@@ -70,7 +70,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="net-win.cpp" />
+    <ClCompile Include="src\netcpp\net\net-win.cpp" />
     <ClCompile Include="src\netcpp\net\client-unix.cpp" />
     <ClCompile Include="src\netcpp\net\net-unix.cpp" />
     <ClCompile Include="src\netcpp\net\server-unix.cpp" />
