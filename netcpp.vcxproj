@@ -74,6 +74,7 @@
     <ClCompile Include="src\netcpp\net\client-unix.cpp" />
     <ClCompile Include="src\netcpp\net\net-unix.cpp" />
     <ClCompile Include="src\netcpp\net\server-unix.cpp" />
+    <ClCompile Include="src\netcpp\net\server-win.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\netcpp\net\client.hpp" />

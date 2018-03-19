@@ -24,7 +24,10 @@
     <ClCompile Include="src\netcpp\net\client-unix.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="net-win.cpp">
+    <ClCompile Include="src\netcpp\net\net-win.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\netcpp\net\server-win.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

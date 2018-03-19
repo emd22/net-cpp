@@ -6,6 +6,9 @@
 
 #if defined(__linux__)
 #include <netinet/in.h>
+#elif defined(_WIN32)
+#include <winsock2.h>
+#endif
 
 #define DAT_SIZE 1024
 
@@ -31,5 +34,4 @@ private:
     std::vector<int> client_fds;
 };
 
-#endif
 #endif

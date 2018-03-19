@@ -9,7 +9,16 @@
 #pragma comment (lib, "Mswsock.lib")
 #pragma comment (lib, "AdvApi32.lib")
 
+static bool end = false;
+
+void cli_sig(int sig) {
+    if (sig == SIGINT)
+        end = true;
+}
+
 Client::Client(int port_, const std::string &ip) {
+    signal(SIGINT, cli_sig);
+
 	client_fd = INVALID_SOCKET;
 	addrinfo *result = NULL, *ptr = NULL, hints;
 
@@ -28,7 +37,9 @@ Client::Client(int port_, const std::string &ip) {
 
 	if (connect(client_fd, (struct sockaddr *)&server, sizeof(server)) < 0) {
 		printf("Uh oh! it looks like winsock can't connect to the ip %s with the port %d.\n", ip, port);
-	}
+	    WSACleanup();
+        exit(1);
+    }
 
     server_ip = ip;
     port = port_;
